@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* Layout: narrow single column, a quiet two-part hero (text + ODMR trace), sections separated by mono labels.
+/* Layout: narrow single column, a quiet two-part hero (text + NV/ODMR figure), sections separated by mono labels.
    Palette: cool lab-paper neutrals, accent = NV zero-phonon red (637 nm), second accent = 532 nm pump green. */
 :root{
   --bg:#f5f6f8;
@@ -69,9 +69,9 @@ nav a:hover{color:var(--ink)}
 .btn.primary:hover{color:#fff;filter:brightness(1.08)}
 
 .trace{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 18px 12px}
-.trace-head{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:6px}
-.trace svg{width:100%;height:auto;display:block}
-.trace figcaption{font-size:13px;color:var(--muted);margin-top:8px}
+.trace img{width:100%;height:auto;display:block;background:#fff;border-radius:6px}
+.trace figcaption{font-size:13.5px;line-height:1.55;color:var(--muted);margin-top:10px}
+.trace figcaption b{color:var(--ink);font-weight:600}
 
 /* sections */
 section{padding:56px 0;border-top:1px solid var(--line)}
@@ -173,9 +173,8 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);f
     </div>
 
     <figure class="trace" style="margin:0">
-      <div class="trace-head"><span>CW-ODMR · NV⁻ ground state</span><span>D ≈ 2.87 GHz</span></div>
-      <svg id="odmr" viewBox="0 0 400 220" role="img" aria-label="Illustration of an ODMR spectrum: fluorescence drops at two microwave frequencies split around 2.87 gigahertz."></svg>
-      <figcaption>Illustrative ODMR spectrum. A magnetic field splits the dip at 2.87 GHz into two; the splitting reads out the field.</figcaption>
+      <img src="nv-odmr.png" alt="(a) Energy-level diagram of the NV center: green 532 nm excitation, red fluorescence, and the 2.87 GHz ground-state splitting. (b) ODMR spectra: one fluorescence dip at 2.87 GHz with no field, splitting into two dips when a magnetic field is applied." width="1090" height="792">
+      <figcaption><b>How an NV center senses magnetic fields.</b> (a) A 532 nm green laser excites the NV center, which glows red. Electrons in the m<sub>s</sub> = ±1 spin states can take a dark detour through the singlet levels, so they glow less than those in m<sub>s</sub> = 0. (b) Sweeping a microwave across 2.87 GHz flips the spin and makes the red glow dip. A magnetic field <i>B</i> splits that dip in two, and the gap between them, 2γ<sub>NV</sub><i>B</i>, gives the field strength.</figcaption>
     </figure>
   </div>
 
@@ -309,39 +308,6 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);f
   <div class="wrap">© 2026 Sachin Negi · Department of Physics, IIT Guwahati</div>
 </footer>
 
-<script>
-// Draw an illustrative two-dip ODMR trace (Lorentzian dips at 2.84 and 2.90 GHz).
-(function(){
-  var svg=document.getElementById('odmr'); if(!svg) return;
-  var W=400,H=220,L=36,R=12,T=14,B=34;
-  var f0=2.78,f1=2.96, dips=[2.84,2.90], gamma=0.008, depth=0.12;
-  function x(f){return L+(f-f0)/(f1-f0)*(W-L-R)}
-  function y(v){return T+(1-v)/0.16*(H-T-B)} // v from 0.84..1.00
-  var pts=[],N=240;
-  for(var i=0;i<=N;i++){
-    var f=f0+(f1-f0)*i/N, v=1;
-    dips.forEach(function(d){v-=depth*gamma*gamma/((f-d)*(f-d)+gamma*gamma)});
-    v+=0.003*Math.sin(i*1.7)*Math.cos(i*0.53);
-    pts.push([x(f),y(v)]);
-  }
-  var d='M'+pts.map(function(p){return p[0].toFixed(1)+' '+p[1].toFixed(1)}).join(' L');
-  var area=d+' L'+x(f1)+' '+(H-B)+' L'+x(f0)+' '+(H-B)+' Z';
-  var ns='http://www.w3.org/2000/svg', g='';
-  [1.00,0.96,0.92,0.88].forEach(function(v){
-    g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="var(--line)" stroke-width="1"/>';
-    g+='<text x="'+(L-6)+'" y="'+(y(v)+4)+'" text-anchor="end" font-size="10" font-family="var(--mono)" fill="var(--muted)">'+v.toFixed(2)+'</text>';
-  });
-  [2.80,2.84,2.87,2.90,2.94].forEach(function(f){
-    g+='<text x="'+x(f)+'" y="'+(H-B+16)+'" text-anchor="middle" font-size="10" font-family="var(--mono)" fill="var(--muted)">'+f.toFixed(2)+'</text>';
-  });
-  g+='<line x1="'+x(2.87)+'" x2="'+x(2.87)+'" y1="'+T+'" y2="'+(H-B)+'" stroke="var(--pump)" stroke-width="1" stroke-dasharray="3 4"/>';
-  g+='<path d="'+area+'" fill="var(--accent)" opacity="0.07"/>';
-  g+='<path d="'+d+'" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>';
-  g+='<text x="'+((L+W-R)/2)+'" y="'+(H-4)+'" text-anchor="middle" font-size="10.5" font-family="var(--mono)" fill="var(--muted)">microwave frequency (GHz)</text>';
-  g+='<text x="10" y="'+((T+H-B)/2)+'" transform="rotate(-90 10 '+((T+H-B)/2)+')" text-anchor="middle" font-size="10.5" font-family="var(--mono)" fill="var(--muted)">norm. PL</text>';
-  svg.innerHTML=g;
-})();
-</script>
 <script data-goatcounter="https://sachinnegi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
