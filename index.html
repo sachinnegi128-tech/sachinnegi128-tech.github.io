@@ -118,12 +118,15 @@ section h2{font-size:30px;margin-bottom:22px}
 .news h3{font-size:19px;margin-bottom:6px}
 .news p{font-size:15.5px;color:var(--muted)}
 .news .src{margin-top:10px;font-size:14.5px}
+.news figure{margin:12px 0 0;max-width:340px}
+.news figure img{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line)}
+.news figcaption{font-size:13px;color:var(--muted);margin-top:6px}
 @media (max-width:560px){.news li{grid-template-columns:1fr;gap:6px}}
 footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:14px}
 
 @media (max-width:820px){
   .hero{grid-template-columns:1fr;gap:32px;padding:44px 0}
-  .grid,.two,.contact{grid-template-columns:1fr}
+  .grid,.two,.contact{grid-template-columns:1fr !important}
   nav ul{gap:14px}
 }
 @media (max-width:560px){
@@ -192,6 +195,24 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);f
     <h2 id="news-h">News and highlights</h2>
     <ul class="news">
       <li>
+        <span class="when">Oct 2026</span>
+        <div>
+          <h3>Femtosecond laser writing in silica</h3>
+          <p>We have recently extended our femtosecond laser writing to fused silica, inscribing an array of straight optical waveguides inside a glass sample. This adds a second material platform alongside our laser-written waveguides in diamond.</p>
+          <figure>
+            <img src="silica-waveguides.jpg" alt="Silica glass sample with an array of parallel femtosecond laser-written waveguides visible as thin lines" width="540" height="720" loading="lazy">
+            <figcaption>Laser-written waveguide array in silica, written in our lab.</figcaption>
+          </figure>
+        </div>
+      </li>
+      <li>
+        <span class="when">2026</span>
+        <div>
+          <h3>Low-cost beam profiler developed</h3>
+          <p>We have built a low-cost laser beam profiler from a Raspberry Pi and a small camera module behind a microscope objective, with a calibrated pixel-to-micron pipeline. It lets us measure beam size and shape in the lab for a fraction of the cost of a commercial profiler.</p>
+        </div>
+      </li>
+      <li>
         <span class="when">Sep 2026</span>
         <div>
           <h3>Diamond magnetometers record the human heartbeat</h3>
@@ -239,12 +260,25 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);f
         <span><b>Host</b> IIT Guwahati</span>
         <span><b>Fabrication</b> in collaboration with SSSIHL</span>
       </div>
-      <ul>
-        <li>Simulation and fabrication of laser-written waveguides, splitters and couplers in diamond</li>
-        <li>Transmission ODMR and line-scan magnetic imaging through diamond waveguides</li>
-        <li>Plasmon-enhanced nanodiamond biosensors and relaxometry-based biomarker detection</li>
-        <li>Lab instrumentation: CW-ODMR chain, confocal raster scanning, balanced photodetection and a low-cost beam profiler</li>
-      </ul>
+      <p>PARIMANA aims to put quantum sensors on a chip. Diamond contains nitrogen-vacancy (NV) centers, atom-sized defects whose red glow changes with the magnetic field around them, even at room temperature. By writing optical waveguides directly inside diamond with femtosecond laser pulses, we can guide green laser light to the NV centers and collect their fluorescence in one compact, robust device, without bulky free-space optics.</p>
+      <p>The goal is a platform that can map weak magnetic fields with high spatial resolution and detect disease biomarkers, bringing quantum sensing out of the optics lab and closer to real-world medical and environmental use.</p>
+    </div>
+    <div class="grid" style="margin-top:18px;grid-template-columns:repeat(3,1fr)">
+      <article class="card">
+        <h3>Fabrication</h3>
+        <p>Femtosecond laser writing of stress-induced waveguides in diamond, and designs for on-chip components such as Y-splitters and directional couplers, modeled in full 3D with COMSOL.</p>
+      </article>
+      <article class="card">
+        <h3>Quantum imaging</h3>
+        <p>Using the laser-written waveguides as sensing lines: microwaves and light read out NV spins along each guide (ODMR), giving line-scan images of magnetic fields.</p>
+      </article>
+      <article class="card">
+        <h3>Biosensing</h3>
+        <p>Nanodiamonds paired with gold nanoparticles to boost NV emission, relaxometry-based detection of biomarkers, and compact fiber-coupled NV probes for measuring signals such as the heart's magnetic field.</p>
+      </article>
+    </div>
+    <div class="prose" style="margin-top:22px">
+      <p><b>My role:</b> I work across simulation and experiment, from COMSOL modeling of waveguides and plasmonic structures to building the lab hardware: the ODMR microwave and detection chain, confocal raster scanning, balanced photodetectors, and a low-cost camera-based beam profiler.</p>
     </div>
   </section>
 
