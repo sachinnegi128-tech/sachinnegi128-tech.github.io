@@ -112,6 +112,13 @@ section h2{font-size:30px;margin-bottom:22px}
 .contact .card p{color:var(--ink)}
 .contact .k{font-family:var(--mono);font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
 
+.news{list-style:none;margin:0;padding:0;display:grid;gap:18px;max-width:76ch}
+.news li{display:grid;grid-template-columns:96px 1fr;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 22px}
+.news .when{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:3px;font-variant-numeric:tabular-nums}
+.news h3{font-size:19px;margin-bottom:6px}
+.news p{font-size:15.5px;color:var(--muted)}
+.news .src{margin-top:10px;font-size:14.5px}
+@media (max-width:560px){.news li{grid-template-columns:1fr;gap:6px}}
 footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:14px}
 
 @media (max-width:820px){
@@ -134,6 +141,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);f
     <a class="brand" href="#about">Sachin Negi</a>
     <nav aria-label="Sections">
       <ul>
+        <li><a href="#news">News</a></li>
         <li><a href="#research">Research</a></li>
         <li><a href="#parimana">PARIMANA</a></li>
         <li><a href="#publications">Publications</a></li>
@@ -179,6 +187,21 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);f
       <p>My research combines finite-element simulation, femtosecond laser fabrication and hands-on instrument building. I model stress-induced waveguides and plasmonic structures in COMSOL, fabricate devices in diamond, and build the optical and microwave setups that read out NV spin states.</p>
       <p>I am a fellow on the <b>PARIMANA</b> project, supported by the QMET Fellowship, which is developing an integrated diamond photonic platform for quantum imaging and biosensing.</p>
     </div>
+  </section>
+
+  <section id="news" aria-labelledby="news-h">
+    <p class="label">News</p>
+    <h2 id="news-h">News and highlights</h2>
+    <ul class="news">
+      <li>
+        <span class="when">Sep 2026</span>
+        <div>
+          <h3>Diamond magnetometers record the human heartbeat</h3>
+          <p>A study in <i>Science Advances</i> reports non-invasive, non-contact magnetocardiography (MCG) on humans using NV-center diamond sensors built by three independent teams: JGU Mainz, the University of Stuttgart and Q.ANT. The room-temperature sensors reach 6–26 pT/√Hz with sensing volumes below 0.5 mm³, and measurements were made in both shielded and unshielded settings. The work is a step toward compact quantum sensors for clinical heart and brain diagnostics, and it is closely related to my own work on NV magnetometer probes.</p>
+          <p class="src">Omar <i>et al.</i>, “Human cardiac measurements with diamond magnetometers,” <i>Science Advances</i> (2026). <a href="https://www.science.org/doi/10.1126/sciadv.aeg5281">Read the paper →</a></p>
+        </div>
+      </li>
+    </ul>
   </section>
 
   <section id="research" aria-labelledby="research-h">
